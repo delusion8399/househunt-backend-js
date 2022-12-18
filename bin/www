@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+/* eslint-disable global-require */
+
+const http = require('http');
+const boostrap = require('./bootstrap');
+const environments = require('../environments');
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+  switch (error.code) {
+    case 'EACCES':
+      console.error(`${environments.server.port} requires elevated privileges`);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(`${environments.server.port} is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+async function startServer() {
+  try {
+    await boostrap();
+    const app = require('../app');
+    const server = http.createServer(app);
+    server.on('error', onError);
+    server.listen(
+      environments.server.port,
+      environments.server.hostname,
+      () => {
+        console.log(`Server started on port ${environments.server.port}`);
+      },
+    );
+  } catch (err) {
+    console.error('server failed to start', err);
+  }
+}
+
+startServer();

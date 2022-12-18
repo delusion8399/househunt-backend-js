@@ -1,0 +1,27 @@
+const router = require('express').Router();
+const bindController = require('../../utils/bindController');
+const {
+  find,
+  findByUser,
+  findBySlug,
+  create,
+  getFilters,
+  deleteProperty,
+  findById,
+  update,
+} = require('./controllers');
+
+router.route('/').get(bindController(find)).post(bindController(create));
+
+router.route('/get').get(bindController(findByUser));
+
+router
+  .route('/:id')
+  .get(bindController(findById))
+  .delete(bindController(deleteProperty))
+  .patch(bindController(update));
+
+router.get('/filters', bindController(getFilters));
+router.get('/:slug', bindController(findBySlug));
+
+module.exports = router;
