@@ -22,6 +22,6 @@ router
   .patch(bindController(update));
 
 router.get('/filters', bindController(getFilters));
-router.get('/:slug', bindController(findBySlug));
+router.get('/slug/:slug', bindController(findBySlug));
 
 module.exports = router;

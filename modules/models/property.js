@@ -121,7 +121,16 @@ const schema = new Schema({
   ],
   billing: new Schema(
     {
-      rent: { type: Number, required: true },
+      rate: { type: Number },
+      propertyFor: {
+        type: String,
+        enum: ['sell', 'rent'],
+      },
+      per: {
+        type: String,
+        enum: ['sqft', 'sqyd', 'sqmtr'],
+      },
+      rent: { type: Number },
       rentPeriod: {
         type: String,
         enum: ['day', 'month', 'year'],

@@ -1,6 +1,10 @@
 function buildListingFilterFromQuery(query) {
   const mongoQuery = {};
 
+  if (query.propertyFor) {
+    mongoQuery['billing.propertyFor'] = query.propertyFor;
+  }
+
   if (query.search) {
     mongoQuery.$text = {
       $search: query.search,

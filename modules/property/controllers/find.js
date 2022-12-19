@@ -20,24 +20,32 @@ async function findBySlug({ slug }) {
   return ApiResponse('SUCCESS', listing);
 }
 
-async function find({ search, page = 0, area, listingType, bedrooms }) {
+async function find({
+  search,
+  page = 0,
+  area,
+  listingType,
+  bedrooms,
+  propertyFor,
+}) {
   const q = buildListingFilterFromQuery({
     search,
     listingType,
     bedrooms,
     area,
+    propertyFor,
   });
-  const [listings, totalDocs] = await Promise.all([
+
+  const [listings, total] = await Promise.all([
     PropertyModel.find(q)
       .skip(page * 14)
       .limit(14)
       .lean(),
     PropertyModel.countDocuments(q),
   ]);
-  const pages = pageFromTotal(totalDocs, 14);
   return ApiResponse('SUCCESS', {
     listings,
-    pages,
+    total,
   });
 }
 
