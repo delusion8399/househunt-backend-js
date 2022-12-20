@@ -12,172 +12,175 @@ const EnumType = {
   enum: ['YES', 'NO', 'NA'],
 };
 
-const schema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  available: Boolean,
-  description: {
-    type: String,
-    required: true,
-  },
-  listingType: {
-    type: String,
-    enum: [
-      'apartment',
-      'room_in_apartment',
-      'daily_rent',
-      'hostel',
-      'office_space',
-      'godown',
-      'shop',
-    ],
-    required: true,
-  },
-  contact: {
-    type: String,
-    required: true,
-  },
-  contacts: [String],
-  address: {
-    building: {
+const schema = new Schema(
+  {
+    title: {
       type: String,
       required: true,
     },
-    road: {
+    available: Boolean,
+    description: {
       type: String,
       required: true,
     },
-    district: {
+    listingType: {
+      type: String,
+      enum: [
+        'apartment',
+        'room_in_apartment',
+        'daily_rent',
+        'hostel',
+        'office_space',
+        'godown',
+        'shop',
+      ],
+      required: true,
+    },
+    contact: {
       type: String,
       required: true,
     },
-    floor: {
-      type: String,
-      default: '-',
-      required: true,
-    },
-    city: {
-      type: String,
-      required: true,
-
-      default: 'Malé',
-    },
-  },
-  placeDescription: [
-    new Schema(
-      {
-        label: String,
-        value: String,
-      },
-      { _id: false },
-    ),
-  ],
-  placeInfo: {
-    bedrooms: {
-      type: Number,
-      required: true,
-    },
-    bathrooms: {
-      type: Number,
-      required: true,
-    },
-    area: {
-      type: Number,
-      required: true,
-    },
-    balcony: EnumType,
-    frontDoorSecurity: EnumType,
-    securityCameras: EnumType,
-    lift: EnumType,
-    freeWifi: EnumType,
-    freeTv: EnumType,
-    accmodationFor: {
-      type: String,
-      enum: ['girls', 'boys', 'any'],
-      default: 'any',
-    },
-    idealTenants: {
-      type: String,
-      default: 'Any',
-    },
-    furnishing: {
-      type: String,
-      enum: ['Not Furnished', 'Semi-Furnished', 'Fully Furnished', '-'],
-    },
-  },
-  images: [
-    new Schema(
-      {
-        url: String,
-        name: String,
-        path: String,
-        size: String,
-        type: { type: String },
-      },
-      { _id: false },
-    ),
-  ],
-  billing: new Schema(
-    {
-      rate: { type: Number },
-      propertyFor: {
+    contacts: [String],
+    address: {
+      building: {
         type: String,
-        enum: ['sell', 'rent'],
-      },
-      per: {
-        type: String,
-        enum: ['sqft', 'sqyd', 'sqmtr'],
-      },
-      rent: { type: Number },
-      rentPeriod: {
-        type: String,
-        enum: ['day', 'month', 'year'],
-        default: 'month',
-      },
-      advance: {
-        type: Number,
-        default: 0,
         required: true,
       },
-      otherCharges: [
-        new Schema(
-          {
-            label: String,
-            value: Number,
-          },
-          { timestamps: false, _id: false },
-        ),
-      ],
-      bills: new Schema(
+      road: {
+        type: String,
+        required: true,
+      },
+      district: {
+        type: String,
+        required: true,
+      },
+      floor: {
+        type: String,
+        default: '-',
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+
+        default: 'Malé',
+      },
+    },
+    placeDescription: [
+      new Schema(
         {
-          water: {
-            type: String,
-            enum: ['included', 'separate'],
-            default: 'separate',
-          },
-          electricity: {
-            type: String,
-            enum: ['included', 'separate'],
-            default: 'separate',
-          },
+          label: String,
+          value: String,
         },
         { _id: false },
       ),
+    ],
+    placeInfo: {
+      bedrooms: {
+        type: Number,
+        required: true,
+      },
+      bathrooms: {
+        type: Number,
+        required: true,
+      },
+      area: {
+        type: Number,
+        required: true,
+      },
+      balcony: EnumType,
+      frontDoorSecurity: EnumType,
+      securityCameras: EnumType,
+      lift: EnumType,
+      freeWifi: EnumType,
+      freeTv: EnumType,
+      accmodationFor: {
+        type: String,
+        enum: ['girls', 'boys', 'any'],
+        default: 'any',
+      },
+      idealTenants: {
+        type: String,
+        default: 'Any',
+      },
+      furnishing: {
+        type: String,
+        enum: ['Not Furnished', 'Semi-Furnished', 'Fully Furnished', '-'],
+      },
     },
-    { _id: false },
-  ),
-  slug: {
-    type: String,
+    images: [
+      new Schema(
+        {
+          url: String,
+          name: String,
+          path: String,
+          size: String,
+          type: { type: String },
+        },
+        { _id: false },
+      ),
+    ],
+    billing: new Schema(
+      {
+        rate: { type: Number },
+        propertyFor: {
+          type: String,
+          enum: ['sell', 'rent'],
+        },
+        per: {
+          type: String,
+          enum: ['sqft', 'sqyd', 'sqmtr'],
+        },
+        rent: { type: Number },
+        rentPeriod: {
+          type: String,
+          enum: ['day', 'month', 'year'],
+          default: 'month',
+        },
+        advance: {
+          type: Number,
+          default: 0,
+          required: true,
+        },
+        otherCharges: [
+          new Schema(
+            {
+              label: String,
+              value: Number,
+            },
+            { timestamps: false, _id: false },
+          ),
+        ],
+        bills: new Schema(
+          {
+            water: {
+              type: String,
+              enum: ['included', 'separate'],
+              default: 'separate',
+            },
+            electricity: {
+              type: String,
+              enum: ['included', 'separate'],
+              default: 'separate',
+            },
+          },
+          { _id: false },
+        ),
+      },
+      { _id: false },
+    ),
+    slug: {
+      type: String,
+    },
+    searchText: String,
+    views: Number,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
-  searchText: String,
-  views: Number,
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
-});
+  { timestamps: true },
+);
 
 function getSlug(doc) {
   const type = doc.listingType;
