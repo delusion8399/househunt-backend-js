@@ -6,6 +6,7 @@ const deleteProperty = require('./delete');
 const findById = require('./findById');
 const update = require('./update');
 const { homeData, getTrendingSearches } = require('./home');
+const get = require('./get');
 
 module.exports = {
   find,
@@ -18,4 +19,5 @@ module.exports = {
   update,
   getTrendingSearches,
   homeData,
+  get,
 };

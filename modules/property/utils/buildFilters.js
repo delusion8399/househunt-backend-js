@@ -1,3 +1,12 @@
+function regexQuery(fields, value) {
+  return fields.map((f) => ({
+    [f]: {
+      $regex: value,
+      $options: 'i',
+    },
+  }));
+}
+
 function buildListingFilterFromQuery(query) {
   const mongoQuery = {};
 
@@ -6,9 +15,7 @@ function buildListingFilterFromQuery(query) {
   }
 
   if (query.search) {
-    mongoQuery.$text = {
-      $search: query.search,
-    };
+    mongoQuery.$or = regexQuery(['title', 'address.city'], query.search);
   }
 
   if (query.listingType) {

@@ -36,6 +36,10 @@ const schema = new Schema(
       ],
       required: true,
     },
+    builder: {
+      type: String,
+      required: true,
+    },
     contact: {
       type: String,
       required: true,
