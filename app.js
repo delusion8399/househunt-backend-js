@@ -1,6 +1,5 @@
 const express = require('express');
 const httpLogger = require('morgan');
-const path = require('path');
 const cors = require('cors');
 const routes = require('./routes');
 
@@ -28,9 +27,8 @@ app.use((req, res, next) => {
   }
 });
 
-app.use('/', routes);
-
 app.use('/public', express.static(`${__dirname}/public`));
+app.use('/', routes);
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 
