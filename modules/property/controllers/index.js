@@ -7,6 +7,7 @@ const findById = require('./findById');
 const update = require('./update');
 const { homeData, getTrendingSearches } = require('./home');
 const get = require('./get');
+const getHotProperties = require('./getHotProperties');
 
 module.exports = {
   find,
@@ -20,4 +21,5 @@ module.exports = {
   getTrendingSearches,
   homeData,
   get,
+  getHotProperties,
 };

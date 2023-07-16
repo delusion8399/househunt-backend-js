@@ -33,6 +33,12 @@ const schema = new Schema({
     type: String,
     enum: ['admin', 'user'],
   },
+  country: {
+    type: String,
+  },
+  state: {
+    type: String,
+  },
 });
 
 /** @type {import('mongoose').Model<any, any>} */

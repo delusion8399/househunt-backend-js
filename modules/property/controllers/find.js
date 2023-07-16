@@ -38,6 +38,7 @@ async function find({
 
   const [listings, total] = await Promise.all([
     PropertyModel.find(q)
+      .sort({ _id: -1 })
       .skip(page * 14)
       .limit(14)
       .lean(),

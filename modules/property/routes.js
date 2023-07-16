@@ -10,6 +10,7 @@ const {
   findById,
   update,
   get,
+  getHotProperties,
 } = require('./controllers');
 
 router.route('/').get(bindController(find)).post(bindController(create));
@@ -17,6 +18,8 @@ router.route('/').get(bindController(find)).post(bindController(create));
 router.route('/get-featured').get(bindController(get));
 
 router.route('/get').get(bindController(findByUser));
+
+router.route('/get-hot-properties').get(bindController(getHotProperties));
 
 router
   .route('/:id')

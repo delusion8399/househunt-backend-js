@@ -37,8 +37,6 @@ function buildListingFilterFromQuery(query) {
     ];
   }
 
-  console.log('query generated', { query, mongoQuery });
-
   return mongoQuery;
 }
 
